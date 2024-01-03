@@ -1,4 +1,4 @@
-EpicGlob# Import necessary libraries
+Import necessary libraries
 from pip._vendor import requests
 from pprint import pprint as pp
 
@@ -36,4 +36,4 @@ print("Capital :", Capital)
 print("Timezone: ", Timezone)
 print("Currency :", Currencies)
 print("Is UN Member: ", unMember)
-e Tracker
+

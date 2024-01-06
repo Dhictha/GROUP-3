@@ -13,6 +13,46 @@ data = response.json()
 
 pp(data)
 
+#On covid-19 api
+
+from pip._vendor import requests
+from pprint import pprint as pp
+
+# Prompt user for the name of a country
+country = input("Enter the country of your choice: ")
+
+# Construct the API endpoint for COVID-19 data by country
+endpoint = f"https://disease.sh/v3/covid-19/countries/{country}"
+
+# Make the GET request to the API
+response = requests.get(endpoint)
+print(response.status_code)
+
+# Parse the JSON response data
+data = response.json()
+
+# Check if the data contains population and deaths information
+for population in data:
+    for deaths in data:
+        # Extract population and deaths values from the data
+        population = data['population']
+        deaths = data['deaths']
+
+# Calculate population left after COVID
+population_left_after_covid = population - deaths
+
+# Print information about the country's population, deaths, and population left after COVID
+print(f"Population: {population}")
+print(f"Deaths: {deaths}")
+print(f"Population left after COVID: {population_left_after_covid}")
+
+# Add the calculated population left after COVID to the data dictionary
+data['population_left_after_covid'] = population_left_after_covid
+
+# Pretty print the updated data dictionary
+pp(data)
+
+
 # Import necessary modules
 from pip._vendor import requests
 from pprint import pprint as pp
@@ -91,8 +131,9 @@ def fetch_world_bank_data(country_code):
     
     return country_data
 
-# Replace 'US' with the desired country code
-country_code = 'GH'
+
+# Input your country code e.g 'NG' for Nigeria, 'KE' for Kenya
+country_code = input("Enter the country code: ")
 
 # Fetch data for the specified country
 country_info = fetch_world_bank_data(country_code)

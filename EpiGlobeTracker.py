@@ -94,17 +94,13 @@ unMember = data[0]['unMember']
 # # Print information about the country
 print("Area:", area_value)
 print("Population:", Population)
-print("Capital :", Capital)
-print("Timezone: ", Timezone)
-print("Currency :", Currencies)
-print("Is UN Member: ", unMember)
 
 
-# ## new function
+## new function
 
-# def fetch_world_bank_data(country_code):
-#     # World Bank API URL for GDP indicator
-#     gdp_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/NY.GDP.MKTP.CD?format=json'
+def fetch_world_bank_data(country_code):
+    # World Bank API URL for GDP indicator
+    gdp_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/NY.GDP.MKTP.CD?format=json'
     
 #     # World Bank API URL for health expenditure indicator
 #     health_expenditure_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/SH.XPD.CHEX.GD.ZS?format=json'

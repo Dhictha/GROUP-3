@@ -95,6 +95,32 @@ data['population_left_after_covid'] = population_left_after_covid
 # Pretty print the updated data dictionary
 pp(data)
 
+#sort the top 10 countries by the largest number of deaths
+from pprint import pprint as pp
+import requests
+
+# Construct the endpoint URL for all countries
+all_countries_endpoint = "https://disease.sh/v3/covid-19/countries"
+
+# Make the GET request
+response = requests.get(all_countries_endpoint)
+
+# Check the response status code
+if response.status_code == 200:
+    # Parse the response data for all countries
+    all_countries_data = response.json()
+
+    # Sort the countries by deaths in descending order
+    top_10_countries = sorted(all_countries_data, key=lambda x: x.get("deaths", 0), reverse=True)[:10]
+
+    # Print the top 10 countries
+    print("Top 10 countries by deaths:")
+    for country in top_10_countries:
+        print(f"{country['country']}: {country['deaths']}")
+else:
+    print(f"Failed to retrieve data for all countries. Status code: {response.status_code}")
+
+
 
 
 #Retrieving data from the WORLD BANK API

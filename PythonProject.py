@@ -1,8 +1,40 @@
 #PROJECT ON COVID-19
+##Retrieving data from the NEWS API
+import requests
+from pprint import pp
+
+# Define the URL for the COVID-19 News API
+url = "https://covid-19-news.p.rapidapi.com/v1/covid"
+
+# Define query parameters for the API request
+querystring = {"q":"covid","lang":"en","media":"True"}
+
+# Set the headers including the RapidAPI key and host for authentication
+headers = {
+	"X-RapidAPI-Key": "d46123fc60msha5c4af93f2cd2a5p1da0dejsn6dae8e8c0828",
+	"X-RapidAPI-Host": "covid-19-news.p.rapidapi.com"
+}
+
+# Make a GET request to the API with the specified URL, headers, and query parameters
+response = requests.get(url, headers=headers, params=querystring)
+response = response.json()
+
+#Format on how the display will look like
+for articles in response['articles']:
+	print("Summary: " + articles['summary'])
+	print("Author: " + articles['author'])
+	print("Country: " + articles['country'])
+	print("Link: " + articles['link'])
+	print("Published Date: " + articles['published_date'])
+
+	#Separator for each article
+	print("-----------------------------------------------------")
+	print("\n")
+
 #Retrieving data from the COVID-19 API
 from pip._vendor import requests
 from pprint import pprint as pp
-
+ 
 country = input("Enter the country of your choice: ")
 endpoint_url = f"https://disease.sh/v3/covid-19/countries/{country}"
  
@@ -10,9 +42,10 @@ response = requests.get(endpoint_url)
 print(response.status_code)
  
 data = response.json()
-
+ 
 pp(data)
 
+#Retrieving data from the WORLD BANK API
 from pip._vendor import requests
 
 # Function to fetch data from the World Bank API
@@ -111,17 +144,5 @@ print("Timezone: ", Timezone)
 print("Currency :", Currencies)
 print("Is UN Member: ", unMember)
 
-#Retrieving data from the COVID-19 API
-from pip._vendor import requests
-from pprint import pprint as pp
- 
-country = input("Enter the country of your choice: ")
-endpoint_url = f"https://disease.sh/v3/covid-19/countries/{country}"
- 
-response = requests.get(endpoint_url)
-print(response.status_code)
- 
-data = response.json()
- 
-pp(data)
+
 

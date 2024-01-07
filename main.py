@@ -103,3 +103,35 @@ print("GDP before COVID:", country_info.get('GDP_before_covid'))
 print("Health Expenditure:", country_info.get('Health_expenditure'))
 print("Hospital Beds per 1000 people:", country_info.get('Hospital_beds_per_1000'))
 
+## NEW FUNCTION
+
+import requests
+from pprint import pp
+
+# Define the URL for the COVID-19 News API
+url = "https://covid-19-news.p.rapidapi.com/v1/covid"
+
+# Define query parameters for the API request
+querystring = {"q":"covid","lang":"en","media":"True"}
+
+# Set the headers including the RapidAPI key and host for authentication
+headers = {
+	"X-RapidAPI-Key": "d46123fc60msha5c4af93f2cd2a5p1da0dejsn6dae8e8c0828",
+	"X-RapidAPI-Host": "covid-19-news.p.rapidapi.com"
+}
+
+# Make a GET request to the API with the specified URL, headers, and query parameters
+response = requests.get(url, headers=headers, params=querystring)
+response = response.json()
+
+#Format on how the display will look like
+for articles in response['articles']:
+	print("Summary: " + articles['summary'])
+	print("Author: " + articles['author'])
+	print("Country: " + articles['country'])
+	print("Link: " + articles['link'])
+	print("Published Date: " + articles['published_date'])
+
+	#Separator for each article
+	print("-----------------------------------------------------")
+	print("\n")

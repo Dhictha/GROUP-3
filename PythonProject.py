@@ -60,3 +60,32 @@ print("Information for Country:", country_code)
 print("GDP before COVID:", country_info.get('GDP_before_covid'))
 print("Health Expenditure:", country_info.get('Health_expenditure'))
 print("Hospital Beds per 1000 people:", country_info.get('Hospital_beds_per_1000'))
+
+#Rest countries api
+# # Import necessary modules
+from pip._vendor import requests
+from pprint import pprint as pp
+
+# # Prompt user for the name of the country
+name = input("Enter the name of the country: ")
+
+# # Construct the API endpoint for the given country
+endpoint = f"https://restcountries.com/v3.1/name/{name}?fullText=true"
+
+# # Make the GET request to the API
+response = requests.get(endpoint)
+
+# # Print the HTTP status code received from the API
+print(response.status_code)
+
+# # Parse the JSON response data
+data = response.json()
+
+# # Extract specific information from the response data
+area_value = data[0]['area']
+Population = data[0]['population']
+
+# # Print information about the country
+print("Area:", area_value)
+print("Population:", Population)
+

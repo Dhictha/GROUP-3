@@ -1,67 +1,67 @@
-#PROJECT ON COVID-19
-#Retrieving data from the COVID-19 API
-from pip._vendor import requests
-from pprint import pprint as pp
+# #PROJECT ON COVID-19
+# #Retrieving data from the COVID-19 API
+# from pip._vendor import requests
+# from pprint import pprint as pp
 
-country = input("Enter the country of your choice: ")
-endpoint_url = f"https://disease.sh/v3/covid-19/countries/{country}"
+# country = input("Enter the country of your choice: ")
+# endpoint_url = f"https://disease.sh/v3/covid-19/countries/{country}"
  
-response = requests.get(endpoint_url)
-print(response.status_code)
+# response = requests.get(endpoint_url)
+# print(response.status_code)
  
-data = response.json()
+# data = response.json()
 
-pp(data)
+# pp(data)
 
-#On covid-19 api
+# #On covid-19 api
 
-from pip._vendor import requests
-from pprint import pprint as pp
+# from pip._vendor import requests
+# from pprint import pprint as pp
 
-# Prompt user for the name of a country
-country = input("Enter the country of your choice: ")
+# # Prompt user for the name of a country
+# country = input("Enter the country of your choice: ")
 
-# Construct the API endpoint for COVID-19 data by country
-endpoint = f"https://disease.sh/v3/covid-19/countries/{country}"
+# # Construct the API endpoint for COVID-19 data by country
+# endpoint = f"https://disease.sh/v3/covid-19/countries/{country}"
 
-# Make the GET request to the API
-response = requests.get(endpoint)
-print(response.status_code)
+# # Make the GET request to the API
+# response = requests.get(endpoint)
+# print(response.status_code)
 
-# Parse the JSON response data
-data = response.json()
+# # Parse the JSON response data
+# data = response.json()
 
-# Check if the data contains some information
-for population in data:
-    for deaths in data:
-        for cases in data:
-            for tests in data:
-                #Extract population and deaths values from the data
-                population = data['population']
-                deaths = data['deaths']
-                cases = data['cases']
-                tests = data['tests']
+# # Check if the data contains some information
+# for population in data:
+#     for deaths in data:
+#         for cases in data:
+#             for tests in data:
+#                 #Extract population and deaths values from the data
+#                 population = data['population']
+#                 deaths = data['deaths']
+#                 cases = data['cases']
+#                 tests = data['tests']
 
-#Calculate tested positive and negative cases
+# #Calculate tested positive and negative cases
 
-tested_positive = cases
-tested_negative = tests - cases
+# tested_positive = cases
+# tested_negative = tests - cases
 
-# Calculate population left after COVID
-population_left_after_covid = population - deaths
+# # Calculate population left after COVID
+# population_left_after_covid = population - deaths
 
-#Print information about the country's population, deaths, population left after COVID(affected&un-affected) and tested positive & negative
-print(f"Population: {population}")
-print(f"Deaths: {deaths}")
-print(f"Population left after COVID: {population_left_after_covid}")
-print(f"Tested_positive:{tested_positive}")
-print(f"Tested_negative:{tested_negative}")
+# #Print information about the country's population, deaths, population left after COVID(affected&un-affected) and tested positive & negative
+# print(f"Population: {population}")
+# print(f"Deaths: {deaths}")
+# print(f"Population left after COVID: {population_left_after_covid}")
+# print(f"Tested_positive:{tested_positive}")
+# print(f"Tested_negative:{tested_negative}")
 
-# Add the calculated population left after COVID to the data dictionary
-data['population_left_after_covid'] = population_left_after_covid
+# # Add the calculated population left after COVID to the data dictionary
+# data['population_left_after_covid'] = population_left_after_covid
 
-# Pretty print the updated data dictionary
-pp(data)
+# # Pretty print the updated data dictionary
+# pp(data)
 
 
 # Import necessary modules
@@ -92,66 +92,66 @@ print("Area:", area_value)
 print("Population:", Population)
 
 
-## new function
+# ## new function
 
-def fetch_world_bank_data(country_code):
-    # World Bank API URL for GDP indicator
-    gdp_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/NY.GDP.MKTP.CD?format=json'
+# def fetch_world_bank_data(country_code):
+#     # World Bank API URL for GDP indicator
+#     gdp_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/NY.GDP.MKTP.CD?format=json'
     
-    # World Bank API URL for health expenditure indicator
-    health_expenditure_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/SH.XPD.CHEX.GD.ZS?format=json'
+#     # World Bank API URL for health expenditure indicator
+#     health_expenditure_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/SH.XPD.CHEX.GD.ZS?format=json'
     
-    # World Bank API URL for hospital beds per 1000 people indicator
-    hospital_beds_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/SH.MED.BEDS.ZS?format=json'
+#     # World Bank API URL for hospital beds per 1000 people indicator
+#     hospital_beds_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/SH.MED.BEDS.ZS?format=json'
     
-    # Replace {COUNTRY_CODE} with the desired country code
-    # (e.g., 'US' for the United States, 'IN' for India, etc.)
+#     # Replace {COUNTRY_CODE} with the desired country code
+#     # (e.g., 'US' for the United States, 'IN' for India, etc.)
     
-    # Dictionary to store fetched data
-    country_data = {}
+#     # Dictionary to store fetched data
+#     country_data = {}
     
-    # Fetch GDP data
-    response = requests.get(gdp_url.format(COUNTRY_CODE=country_code))
-    if response.status_code == 200:
-        gdp_data = response.json()[1]
-        latest_gdp = next((x for x in gdp_data if x['value'] is not None), None)
-        if latest_gdp:
-            country_data['GDP_before_covid'] = latest_gdp['value']
-        else:
-            country_data['GDP_before_covid'] = None
+#     # Fetch GDP data
+#     response = requests.get(gdp_url.format(COUNTRY_CODE=country_code))
+#     if response.status_code == 200:
+#         gdp_data = response.json()[1]
+#         latest_gdp = next((x for x in gdp_data if x['value'] is not None), None)
+#         if latest_gdp:
+#             country_data['GDP_before_covid'] = latest_gdp['value']
+#         else:
+#             country_data['GDP_before_covid'] = None
     
-    # Fetch health expenditure data
-    response = requests.get(health_expenditure_url.format(COUNTRY_CODE=country_code))
-    if response.status_code == 200:
-        health_expenditure_data = response.json()[1]
-        latest_health_expenditure = next((x for x in health_expenditure_data if x['value'] is not None), None)
-        if latest_health_expenditure:
-            country_data['Health_expenditure'] = latest_health_expenditure['value']
-        else:
-            country_data['Health_expenditure'] = None
+#     # Fetch health expenditure data
+#     response = requests.get(health_expenditure_url.format(COUNTRY_CODE=country_code))
+#     if response.status_code == 200:
+#         health_expenditure_data = response.json()[1]
+#         latest_health_expenditure = next((x for x in health_expenditure_data if x['value'] is not None), None)
+#         if latest_health_expenditure:
+#             country_data['Health_expenditure'] = latest_health_expenditure['value']
+#         else:
+#             country_data['Health_expenditure'] = None
     
-    # Fetch hospital beds data
-    response = requests.get(hospital_beds_url.format(COUNTRY_CODE=country_code))
-    if response.status_code == 200:
-        hospital_beds_data = response.json()[1]
-        latest_hospital_beds = next((x for x in hospital_beds_data if x['value'] is not None), None)
-        if latest_hospital_beds:
-            country_data['Hospital_beds_per_1000'] = latest_hospital_beds['value']
-        else:
-            country_data['Hospital_beds_per_1000'] = None
+#     # Fetch hospital beds data
+#     response = requests.get(hospital_beds_url.format(COUNTRY_CODE=country_code))
+#     if response.status_code == 200:
+#         hospital_beds_data = response.json()[1]
+#         latest_hospital_beds = next((x for x in hospital_beds_data if x['value'] is not None), None)
+#         if latest_hospital_beds:
+#             country_data['Hospital_beds_per_1000'] = latest_hospital_beds['value']
+#         else:
+#             country_data['Hospital_beds_per_1000'] = None
     
-    return country_data
+#     return country_data
 
 
-# Input your country code e.g 'NG' for Nigeria, 'KE' for Kenya
-country_code = input("Enter the country code: ")
+# # Input your country code e.g 'NG' for Nigeria, 'KE' for Kenya
+# country_code = input("Enter the country code: ")
 
-# Fetch data for the specified country
-country_info = fetch_world_bank_data(country_code)
+# # Fetch data for the specified country
+# country_info = fetch_world_bank_data(country_code)
 
-# Display the retrieved information
-print("Information for Country:", country_code)
-print("GDP before COVID:", country_info.get('GDP_before_covid'))
-print("Health Expenditure:", country_info.get('Health_expenditure'))
-print("Hospital Beds per 1000 people:", country_info.get('Hospital_beds_per_1000'))
+# # Display the retrieved information
+# print("Information for Country:", country_code)
+# print("GDP before COVID:", country_info.get('GDP_before_covid'))
+# print("Health Expenditure:", country_info.get('Health_expenditure'))
+# print("Hospital Beds per 1000 people:", country_info.get('Hospital_beds_per_1000'))
 

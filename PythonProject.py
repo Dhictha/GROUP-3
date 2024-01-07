@@ -62,19 +62,32 @@ print(response.status_code)
 # Parse the JSON response data
 data = response.json()
 #we use for loop to run through our fetched data
+# Check if the data contains some information
 for population in data:
     for deaths in data:
-        # Extract population and deaths values from the data
-        population = data['population']
-        deaths = data['deaths']
+        for cases in data:
+            for tests in data:
+                #Extract population and deaths values from the data
+                population = data['population']
+                deaths = data['deaths']
+                cases = data['cases']
+                tests = data['tests']
 
-# Calculate population left after COVID
-population_left_after_covid =({population - deaths})
+#Calculate tested positive and negative cases
 
-# Print information about the country's population, deaths, and population left after COVID
+tested_positive = cases
+tested_negative = tests - cases
+
+# # Calculate population left after COVID
+# population_left_after_covid = population - deaths
+
+#Print information about the country's population, deaths, population left after COVID(affected&un-affected) and tested positive & negative
 print(f"Population: {population}")
 print(f"Deaths: {deaths}")
 print(f"Population left after COVID: {population_left_after_covid}")
+print(f"Tested_positive:{tested_positive}")
+print(f"Tested_negative:{tested_negative}")
+
 
 # Add the calculated population left after COVID to the data dictionary
 data['population_left_after_covid'] = population_left_after_covid

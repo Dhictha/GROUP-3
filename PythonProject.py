@@ -97,7 +97,7 @@ def fetch_world_bank_data(country_code):
     
     return country_data
 
-# Ask the user to enter the country code e.g('NG' for Nigeria, 'KE' for Kenya)
+# Enter the country code e.g('NG' for Nigeria, 'KE' for Kenya)
 country_code = input("Enter the country code: ")
 
 # Fetch data for the specified country

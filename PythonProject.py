@@ -81,28 +81,35 @@ print("Hospital Beds per 1000 people:", country_info.get('Hospital_beds_per_1000
 from pip._vendor import requests
 from pprint import pprint as pp
 
-# # Prompt user for the name of the country
+# # # Prompt user for the name of the country
 name = input("Enter the name of the country: ")
 
-# # Construct the API endpoint for the given country
+# # # Construct the API endpoint for the given country
 endpoint = f"https://restcountries.com/v3.1/name/{name}?fullText=true"
 
-# # Make the GET request to the API
+# # # Make the GET request to the API
 response = requests.get(endpoint)
 
-# # Print the HTTP status code received from the API
+# # # Print the HTTP status code received from the API
 print(response.status_code)
 
-# # Parse the JSON response data
+# # # Parse the JSON response data
 data = response.json()
 
-# # Extract specific information from the response data
+# # # Extract specific information from the response data
 area_value = data[0]['area']
 Population = data[0]['population']
-
-# # Print information about the country
+Capital = data[0]['capital']
+Timezone = data[0]['timezones']
+Currencies = data[0]['currencies']
+unMember = data[0]['unMember']
+# # # Print information about the country
 print("Area:", area_value)
 print("Population:", Population)
+print("Capital :", Capital)
+print("Timezone: ", Timezone)
+print("Currency :", Currencies)
+print("Is UN Member: ", unMember)
 
 #Retrieving data from the COVID-19 API
 from pip._vendor import requests

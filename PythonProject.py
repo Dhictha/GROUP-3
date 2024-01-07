@@ -64,8 +64,8 @@ def fetch_world_bank_data(country_code):
     
     return country_data
 
-# Replace 'US' with the desired country code
-country_code = 'US'
+# Ask the user to enter the country code e.g('NG' for Nigeria, 'KE' for Kenya)
+country_code = input("Enter the country code: ")
 
 # Fetch data for the specified country
 country_info = fetch_world_bank_data(country_code)

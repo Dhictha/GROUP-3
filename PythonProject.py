@@ -1,6 +1,6 @@
 #PROJECT ON COVID-19
 ##Retrieving data from the NEWS API
-import requests
+from pip._vendor import requests
 from pprint import pp
 
 # Define the URL for the COVID-19 News API
@@ -84,20 +84,20 @@ tested_negative = tests - cases
 #Print information about the country's population, deaths, population left after COVID(affected&un-affected) and tested positive & negative
 print(f"Population: {population}")
 print(f"Deaths: {deaths}")
-print(f"Population left after COVID: {population_left_after_covid}")
+#print(f"Population left after COVID: {population_left_after_covid}")
 print(f"Tested_positive:{tested_positive}")
 print(f"Tested_negative:{tested_negative}")
 
 
 # Add the calculated population left after COVID to the data dictionary
-data['population_left_after_covid'] = population_left_after_covid
+#data['population_left_after_covid'] = population_left_after_covid
 
 # Pretty print the updated data dictionary
 pp(data)
 
 #sort the top 10 countries by the largest number of deaths
 from pprint import pprint as pp
-import requests
+from pip._vendor import requests
 
 # Construct the endpoint URL for all countries
 all_countries_endpoint = "https://disease.sh/v3/covid-19/countries"
@@ -214,6 +214,8 @@ Capital = data[0]['capital']
 Timezone = data[0]['timezones']
 Currencies = data[0]['currencies']
 unMember = data[0]['unMember']
+languages = data[0]['languages']
+continents = data[0]['continents']
 # # # Print information about the country
 print("Area:", area_value)
 print("Population:", Population)
@@ -221,6 +223,8 @@ print("Capital :", Capital)
 print("Timezone: ", Timezone)
 print("Currency :", Currencies)
 print("Is UN Member: ", unMember)
+print("languages: ", languages)
+print("continents :", continents)
 
 
 

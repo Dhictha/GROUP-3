@@ -1,12 +1,12 @@
 #PROJECT ON COVID-19
-##Retrieving data from the NEWS API
+##RETRIEVING HEALTH(COVID) RELATED NEWS FROM THE NEWS API
 from pip._vendor import requests
 from pprint import pp
 
-# Define the URL for the COVID-19 News API
+# URL for the COVID-19 News API
 url = "https://covid-19-news.p.rapidapi.com/v1/covid"
 
-# Define query parameters for the API request
+# Query parameters for the API request
 querystring = {"q":"covid","lang":"en","media":"True"}
 
 # Set the headers including the RapidAPI key and host for authentication
@@ -31,102 +31,69 @@ for articles in response['articles']:
 	print("-----------------------------------------------------")
 	print("\n")
 
-#Retrieving data from the COVID-19 API
-from pip._vendor import requests
-from pprint import pprint as pp
- 
-country = input("Enter the country of your choice: ")
-endpoint_url = f"https://disease.sh/v3/covid-19/countries/{country}"
- 
-response = requests.get(endpoint_url)
-print(response.status_code)
- 
-data = response.json()
- 
-pp(data)
-
-#additional extraction on covid
-from pip._vendor import requests
-from pprint import pprint as pp
-
-# Prompt user for the name of a country
+#Print GEOGRAPHICAL information of a country from REST API
+#Prompt user for the name of the country
 country = input("Enter the country of your choice: ")
 
-# Construct the API endpoint for COVID-19 data by country
-endpoint = f"https://disease.sh/v3/covid-19/countries/{country}"
+# Construct the API endpoint for the given country
+endpoint = f"https://restcountries.com/v3.1/name/{country}?fullText=true"
 
 # Make the GET request to the API
 response = requests.get(endpoint)
+
+# Print the HTTP status code received from the API
 print(response.status_code)
 
 # Parse the JSON response data
 data = response.json()
-#we use for loop to run through our fetched data
-# Check if the data contains some information
-for population in data:
-    for deaths in data:
-        for cases in data:
-            for tests in data:
-                #Extract population and deaths values from the data
-                population = data['population']
-                deaths = data['deaths']
-                cases = data['cases']
-                tests = data['tests']
 
-#Calculate tested positive and negative cases
+# Extract specific information from the response data
+continent = data[0]['continents']
+area_value = data[0]['area']
+Population = data[0]['population']
+Capital = data[0]['capital']
+Timezone = data[0]['timezones']
+Languages = data[0]['languages']
+Currencies = data[0]['currencies']
+unMember = data[0]['unMember']
+print()
 
-tested_positive = cases
-tested_negative = tests - cases
+# Print information about the country
+print(f"{country} is located in {continent}. It has an area of {area_value} and {Population} number of people. \nThe capital of {country} is {Capital} and their timezone is {Timezone}. \nThey speak these languages {Languages} and their currency is {Currencies}.")
+print("Is UN Member: ", unMember)
 
-# # Calculate population left after COVID
-# population_left_after_covid = population - deaths
+# Construct the API endpoint for COVID-19 data by country
+endpoint1 = f"https://disease.sh/v3/covid-19/countries/{country}"
+response = requests.get(endpoint1)
 
-#Print information about the country's population, deaths, population left after COVID(affected&un-affected) and tested positive & negative
-print(f"Population: {population}")
-print(f"Deaths: {deaths}")
-#print(f"Population left after COVID: {population_left_after_covid}")
-print(f"Tested_positive:{tested_positive}")
-print(f"Tested_negative:{tested_negative}")
-
-
-# Add the calculated population left after COVID to the data dictionary
-#data['population_left_after_covid'] = population_left_after_covid
-
-# Pretty print the updated data dictionary
-pp(data)
-
-#sort the top 10 countries by the largest number of deaths
-from pprint import pprint as pp
-from pip._vendor import requests
-
-# Construct the endpoint URL for all countries
-all_countries_endpoint = "https://disease.sh/v3/covid-19/countries"
-
-# Make the GET request
-response = requests.get(all_countries_endpoint)
-
-# Check the response status code
 if response.status_code == 200:
-    # Parse the response data for all countries
-    all_countries_data = response.json()
-
-    # Sort the countries by deaths in descending order
-    top_10_countries = sorted(all_countries_data, key=lambda x: x.get("deaths", 0), reverse=True)[:10]
-
-    # Print the top 10 countries
-    print("Top 10 countries by deaths:")
-    for country in top_10_countries:
-        print(f"{country['country']}: {country['deaths']}")
+    data = response.json()
+    #Extract necessaary information
+    cases = data['cases']
+    deaths = data['deaths']
+    recovered = data['recovered']
+    population = data['population']
+    tests = data['tests']
+    #Calculate tested positive and negative cases
+    tested_positive = cases
+    tested_negative = tests - cases
+    population_left_after_covid = population - deaths
+    print()
+    #Print information about the country's population, deaths, population left after COVID(affected&un-affected) and tested positive & negative
+    print(f"{country} has a total population of {population} people.")
+    print(f"Out of the {population} people, {tested_positive} tested positive for COVID-19 and {tested_negative} tested negative.")
+    print(f"Fortunately, some people survived COVID-19, but the number of people who couldn't survive were {deaths}. Thats very unfortunate!")
+    print(f"Population left after COVID: {population_left_after_covid}")
 else:
-    print(f"Failed to retrieve data for all countries. Status code: {response.status_code}")
+    print("Failed to fetch data for the country. Please check the country name or try again later.")
+print()
 
-
-
-
+#Pretty print the updated data dictionary
+#Print if you want more COVID related info for the country
+pp(data)
+print() 
 #Retrieving data from the WORLD BANK API
-from pip._vendor import requests
-
-# Function to fetch data from the World Bank API
+#Function to fetch data from the World Bank API
 def fetch_world_bank_data(country_code):
     # World Bank API URL for GDP indicator
     gdp_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/NY.GDP.MKTP.CD?format=json'
@@ -136,9 +103,7 @@ def fetch_world_bank_data(country_code):
     
     # World Bank API URL for hospital beds per 1000 people indicator
     hospital_beds_url = 'http://api.worldbank.org/v2/country/{COUNTRY_CODE}/indicator/SH.MED.BEDS.ZS?format=json'
-    
-    # Replace {COUNTRY_CODE} with the desired country code
-    # (e.g., 'US' for the United States, 'IN' for India, etc.)
+
     
     # Dictionary to store fetched data
     country_data = {}
@@ -187,44 +152,26 @@ print("GDP before COVID:", country_info.get('GDP_before_covid'))
 print("Health Expenditure:", country_info.get('Health_expenditure'))
 print("Hospital Beds per 1000 people:", country_info.get('Hospital_beds_per_1000'))
 
-#Rest countries api
-# # Import necessary modules
-from pip._vendor import requests
-from pprint import pprint as pp
+#TOP 10 AFFECTED COUNTRIES
+# Construct the endpoint URL for all countries
+all_countries_endpoint = "https://disease.sh/v3/covid-19/countries"
 
-# # # Prompt user for the name of the country
-name = input("Enter the name of the country: ")
+# Make the GET request
+response = requests.get(all_countries_endpoint)
 
-# # # Construct the API endpoint for the given country
-endpoint = f"https://restcountries.com/v3.1/name/{name}?fullText=true"
+# Check the response status code
+if response.status_code == 200:
+    # Parse the response data for all countries
+    all_countries_data = response.json()
 
-# # # Make the GET request to the API
-response = requests.get(endpoint)
+    # Sort the countries by deaths in descending order
+    top_10_countries = sorted(all_countries_data, key=lambda x: x.get("deaths", 0), reverse=True)[:10]
 
-# # # Print the HTTP status code received from the API
-print(response.status_code)
-
-# # # Parse the JSON response data
-data = response.json()
-
-# # # Extract specific information from the response data
-area_value = data[0]['area']
-Population = data[0]['population']
-Capital = data[0]['capital']
-Timezone = data[0]['timezones']
-Currencies = data[0]['currencies']
-unMember = data[0]['unMember']
-languages = data[0]['languages']
-continents = data[0]['continents']
-# # # Print information about the country
-print("Area:", area_value)
-print("Population:", Population)
-print("Capital :", Capital)
-print("Timezone: ", Timezone)
-print("Currency :", Currencies)
-print("Is UN Member: ", unMember)
-print("languages: ", languages)
-print("continents :", continents)
-
+    # Print the top 10 countries
+    print("Top 10 countries by deaths:")
+    for country in top_10_countries:
+        print(f"{country['country']}: {country['deaths']}")
+else:
+    print(f"Failed to retrieve data for all countries. Status code: {response.status_code}")
 
 

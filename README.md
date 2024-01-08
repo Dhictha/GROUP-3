@@ -1,3 +1,6 @@
+![flowchart](https://github.com/Dhictha/GROUP-3/assets/153497287/aedcc166-069d-4a36-a36d-3926de28a4e8)
+
+
 COVID-19 PROJECT 
 This project is aimed at retrieving and processing COVID related data, news, and other geographical information of countries from various APIs. It includes functionalities to fetch news articles, country-specific data, and statistics related to COVID-19, as well as data from the World Bank API.
 

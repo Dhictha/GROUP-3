@@ -174,4 +174,12 @@ if response.status_code == 200:
 else:
     print(f"Failed to retrieve data for all countries. Status code: {response.status_code}")
 
+def merge_data(country_name):
+    country_info = get_country_info(country_name)
+    covid_stats = get_covid19_stats(country_name)
 
+    if country_info and covid_stats:
+        merged_data = {**country_info, **covid_stats}
+        return merged_data
+    else:
+        return None

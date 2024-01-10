@@ -1,5 +1,5 @@
-COVID-19 PROJECT 
-This project is aimed at retrieving and processing COVID related data, news, and other geographical information of countries from various APIs. It includes functionalities to fetch news articles, country-specific data, and statistics related to COVID-19, as well as data from the World Bank API.
+PROJECT ON GLOBAL PANDEMIC (COVID19) TRACKING APP
+This tracking app provides real-time updates on cases, news articles that are related to the pandemic, and also incorporates world bank data to analyze economic impacts. This app could serve as a one-stop resource for users seeking information on various aspects of the global situation.
 
 OVERVIEW OF APIs USED
 * News API - Extracts health(COVID-19) related news from various countries
